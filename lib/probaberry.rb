@@ -1,5 +1,3 @@
-class Probaberry
-	def hey
-		puts "hey"
-	end
-end
+require 'probaberry/counting'
+require 'probaberry/discrete'
+require 'probaberry/nice'
