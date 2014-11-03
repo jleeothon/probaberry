@@ -94,7 +94,7 @@ end
 
 class NegativeBinomial
 	include Cumulative
-	attr_accessor n, p
+	attr_accessor :n, :p
 	def initialize n, p
 		@n = n
 		@p = p
