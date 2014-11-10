@@ -17,6 +17,9 @@ module Cumulative
   def exbetween?
     (self < y) - (self < x - 1)
   end
+  def != x
+    1 - (self == x)
+  end
 end
 
 class Binomial
