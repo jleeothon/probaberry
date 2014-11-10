@@ -68,6 +68,20 @@ The one operation that we do not have official support for, though, is factorial
 => 120
 ```
 
+The next big thing about counting is [combinations](http://en.wikipedia.org/wiki/Combination) and [permutations](http://en.wikipedia.org/wiki/Permutation). They can be computed with the `ncr` and `npr` functions, as in:
+
+```irb
+ncr 24, 11
+=> 2496144
+npr 24, 11
+=> 99638080819200
+
+# this is another "more readable" notation for combinations
+24.choose 11
+=> 2496144
+```
+
+
 Discrete distributions
 ----------------------
 
