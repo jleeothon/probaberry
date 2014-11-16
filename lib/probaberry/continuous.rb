@@ -32,3 +32,16 @@ class Uniform
 
 end
   
+class Exponential
+  
+  include ContinuousVariable
+  
+  def initialize la
+    @la = la
+  end
+  
+  def < x
+    1 - Math::exp(- @la * x)
+  end
+  
+end
