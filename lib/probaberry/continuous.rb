@@ -27,7 +27,7 @@ class Uniform
   end
 
   def < x
-    x / (@b - @a)
+    (x - @a) / (@b - @a)
   end
 
 end
