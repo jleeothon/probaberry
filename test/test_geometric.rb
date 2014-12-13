@@ -1,24 +1,3 @@
-# load 'probaberry.rb'
-
-# def error_message p, operand, x, expected, actual
-#   "Fail: Geometric(p=#{p}) #{operand} x. expected: #{expected}, actual: #{actual}"
-# end
-
-# A = Geometric.new p=0.5
-
-# equality_tests_A = {
-#   1 => 0.5,
-#   2 => 0.25,
-#   3 => 0.1255
-# }
-
-# equality_tests_A.each do |x, expected|
-#   actual = A == x
-#   unless actual == expected
-#     $stderr.puts error_message(A.p, :==, x, expected, actual)
-#   end
-# end
-
 require 'minitest/autorun'
 
 load 'probaberry.rb'
@@ -27,7 +6,7 @@ class TestGeometric < MiniTest::Test
 
   def setup
     @X = Geometric.new p=0.2
-    @Epsilon = 10 ** -7
+    @Epsilon = 5 * 10 ** -4
   end
 
   def test_equality
