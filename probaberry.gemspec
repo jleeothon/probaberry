@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name        = 'probaberry'
-  s.version     = '0.0.0'
+  s.version     = '0.2.0'
   s.date        = '2014-11-03'
   s.summary     = "Probability homework!"
-  s.description = "Do probabily homework with the console!"
+  s.description = "Do probabily homework with irb!"
   s.authors     = ["Johnny Lee Othon"]
   s.email       = 'jleeothon@outlook.com'
   s.files       = [
