@@ -1,7 +1,10 @@
+require 'probaberry/counting.rb'
+require 'probaberry/floatdivision.rb'
+
 module Cumulative
   
   def < x
-    m = (0...x).map{|i| self == i}.reduce(0, :+)
+    (0...x).map{|i| self == i}.reduce(0, :+)
   end
   
   def <= x
@@ -32,6 +35,7 @@ end
 
 
 class Binomial
+
   include Cumulative
   attr_reader :n, :p
   
@@ -91,30 +95,51 @@ class NegativeBinomial
 end
 
 class Geometric
+
   attr_reader :p
  
   def initialize p
+    unless p > 0 and p < 1 then
+      raise 'success rate should be greater than 0 and less than 1'
+    end
     @p = p
   end
  
   def == x
-    p * (1 - p) ** (x - 1)
+    if x > 0 and x.integer? then
+      p * (1 - p) ** (x - 1)
+    else
+      warn "x is not a positive integer" unless x.integer? or x > 0
+      0
+    end
   end
  
   def > x
+    warn "x is not a positive integer" unless x.integer? or x > 0
     # tail lemma!
-    (1 - p) ** x
+    if x > 0 then
+      (1 - p) ** x.ceil
+    else
+      0
+    end
   end
  
   def >= x
+    warn "x is not a positive integer" unless x.integer? or x > 0
     (self == x) + (self > x)
   end
  
   def < x
-    1 - (self >= x)
+    warn "x is not a positive integer" unless x.integer? or x > 0
+    if x > 0
+      1 - (self >= x)
+    else
+      
+    end
   end
  
   def <= x
+    warn "x is not a positive integer" unless x.integer? or x > 0
     1 - (self > x)
   end
 
@@ -125,10 +150,11 @@ class Geometric
 end
 
 class Hypergeometric
+
   include Cumulative
   attr_reader :n, :s, :p
 
-  def initialize
+  def initialize n, s, p
     @n = n
     @s = s
     @p = p
@@ -139,7 +165,7 @@ class Hypergeometric
   end
 
   def expected_value
-    @s * @p / @n
+    @s * @p
   end
 
 end

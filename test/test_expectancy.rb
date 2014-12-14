@@ -1,36 +1,36 @@
-require 'minitest/autorun'
+require 'minitest'
 
 load 'probaberry.rb'
 
 class TestExpectancy < MiniTest::Test
 
     def setup
-        @Epsilon = 5 * 10 ** -5
+        @Delta = 5 * 10 ** -5
     end
 
     def test_geometric_expectancy
         x = Geometric.new p=0.6
-        assert_in_epsilon 1.666666, E(x), @Epsilon
+        assert_in_delta 1.666666, E(x), @Delta
     end
 
     def test_binomial_expectancy
         x = Binomial.new p=0.3, n=10
-        assert_in_epsilon 0, E(x), @Epsilon
+        assert_in_delta 3, E(x), @Delta
     end
 
     def test_hypergeometric_expectancy
-        x = Hypergeometric.new p=0.4, n=3
-        assert_in_epsilon 0, E(x), @Epsilon
+        x = Hypergeometric.new n=10, s=4, p=0.4
+        assert_in_delta 1.6, E(x), @Delta
     end
 
     def test_uniform_expectancy
-        x = Uniform.new a=-4, b=8
-        assert_in_epsilon 0, E(x), @Epsilon
+        x = Uniform.new (-4), 8
+        assert_in_delta (-4 + 8) / 2, E(x), @Delta
     end
 
     def test_exponential_expectancy
-        x = Exponential.new la = 9
-        assert_in_epsilon 0, E(x), @Epsilon
+        x = Exponential.new 9
+        assert_in_delta (1/9), E(x), @Delta
     end
 
 end

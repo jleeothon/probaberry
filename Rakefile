@@ -11,14 +11,23 @@ task :help do
 end
 
 task :console do
-    sh "irb -rubygems -I lib -r probaberry.rb"
+    sh "irb --inspect -rubygems -I lib -r probaberry.rb"
 end
 
 task :default => [:help]
 
-task :test do
-    test_files = Rake::FileList.new "test/test_*.rb"
+task :test, [:testname] do |t, args|
+    testnames = args[:testname]
+    if testnames then
+        testnames = testnames.split
+        test_files = Rake::FileList.new
+        testnames.each do |testname|
+            test_files.include "test/test_#{testname}.rb"
+        end
+    else
+        test_files = Rake::FileList.new "test/test_*.rb"
+    end
     test_files.each do |test_file|
-        ruby "-I lib #{test_file}"
+        ruby "-I lib --verbose -r 'minitest/autorun' #{test_file}"
     end
 end
